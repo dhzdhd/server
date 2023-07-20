@@ -2,7 +2,7 @@ services:
   homer:
     image: b4bz/homer:latest
     ports:
-      - 8080:8080
+      - 16080:8080
     container_name: homer
     user: 1000:1000
     restart: always
@@ -13,7 +13,7 @@ services:
     image: nginx:1.25.1
     container_name: nginx
     ports:
-      - 8081:80
+      - 16443:80
     depends_on:
       - homer
 
@@ -22,7 +22,7 @@ services:
     container_name: portainer
     command: -H unix:///var/run/docker.sock
     ports:
-      - 9000:9000
+      - 16022:9000
     restart: always
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

@@ -7,3 +7,8 @@ The docker compose configuration for the server setup I use in the [vmConsole ap
 - [Homer](https://github.com/bastienwirtz/homer) - a dashboard web app
 - [dufs](https://github.com/sigoden/dufs) - a simple utility file server
 - [Portainer](https://www.portainer.io/) - a Docker monitoring service
+
+## TODO
+
+- Possible switch to [homepage](https://gethomepage.dev/en/configs/widgets/) instead of Homer
+- Add more services :)
