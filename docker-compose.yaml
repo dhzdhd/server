@@ -1,5 +1,5 @@
 services:
-  home:
+  homer:
     image: b4bz/homer:latest
     ports:
       - 8080:8080
@@ -9,9 +9,24 @@ services:
     volumes:
       - ./assets/:/www/assets
 
-  server:
+  nginx:
     image: nginx:1.25.1
+    container_name: nginx
     ports:
       - 8081:80
     depends_on:
-      - home
+      - homer
+
+  portainer:
+    image: portainer/portainer-ce:alpine
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
+
+volumes:
+  portainer_data:
