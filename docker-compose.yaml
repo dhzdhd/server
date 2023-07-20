@@ -1,0 +1,17 @@
+services:
+  home:
+    image: b4bz/homer:latest
+    ports:
+      - 8080:8080
+    container_name: homer
+    user: 1000:1000
+    restart: always
+    volumes:
+      - ./assets/:/www/assets
+
+  server:
+    image: nginx:1.25.1
+    ports:
+      - 5000:80
+    depends_on:
+      - home
