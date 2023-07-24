@@ -52,13 +52,10 @@ message:
 
 # Optional navbar
 links:
-  - name: "Contribute"
+  - name: "GitHub"
     icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
-    target: "_blank" # optional html a tag target attribute
-  - name: "Wiki"
-    icon: "fas fa-book"
-    url: "https://www.wikipedia.org/"
+    url: "https://github.com/dhzdhd"
+    target: "_blank"
 
 # Services
 services:

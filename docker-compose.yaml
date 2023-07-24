@@ -1,3 +1,4 @@
+version: "3.3"
 services:
   homer:
     image: b4bz/homer:latest
@@ -7,26 +8,24 @@ services:
     user: 1000:1000
     restart: always
     volumes:
-      - ./assets/:/www/assets
+      - ./data/homer/assets/:/www/assets
 
   nginx:
     image: nginx:1.25.1
     container_name: nginx
     ports:
       - 16443:80
-    depends_on:
-      - homer
 
-  portainer:
-    image: portainer/portainer-ce:alpine
-    container_name: portainer
-    command: -H unix:///var/run/docker.sock
-    ports:
-      - 16022:9000
-    restart: always
+  openvscode-server:
+    image: lscr.io/linuxserver/openvscode-server:latest
+    container_name: openvscode-server
+    env_file:
+      - ./data/vscode/.env
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "portainer_data:/data"
+      - ./data/vscode/config:/config
+    ports:
+      - 16022:3000
+    restart: unless-stopped
 
 volumes:
   portainer_data:

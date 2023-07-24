@@ -2,3 +2,4 @@ assets/*.dist
 assets/*.sample-sui
 assets/custom.css.sample
 assets/manifest.json
+*.env
