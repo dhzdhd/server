@@ -1,5 +1,5 @@
-assets/*.dist
-assets/*.sample-sui
-assets/custom.css.sample
-assets/manifest.json
 *.env
+
+/data/vscode/config
+/data/vscode/code/*
+!/data/vscode/code/.gitkeep

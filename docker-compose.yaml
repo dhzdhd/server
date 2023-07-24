@@ -17,6 +17,8 @@ services:
       - ./data/dufs/.env
     ports:
       - 16443:5000
+    volumes:
+      - ./data/vscode/code/:/code
     restart: unless-stopped
 
   openvscode-server:
@@ -29,6 +31,3 @@ services:
     ports:
       - 16022:3000
     restart: unless-stopped
-
-volumes:
-  portainer_data:
