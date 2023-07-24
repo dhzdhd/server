@@ -10,11 +10,14 @@ services:
     volumes:
       - ./data/homer/assets/:/www/assets
 
-  nginx:
-    image: nginx:1.25.1
-    container_name: nginx
+  dufs:
+    image: sigoden/dufs
+    container_name: dufs
+    env_file:
+      - ./data/dufs/.env
     ports:
-      - 16443:80
+      - 16443:5000
+    restart: unless-stopped
 
   openvscode-server:
     image: lscr.io/linuxserver/openvscode-server:latest
