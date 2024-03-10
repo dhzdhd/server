@@ -1,33 +1,51 @@
 version: "3.3"
 services:
+  swag:
+    container_name: swag
+    image: lscr.io/linuxserver/swag:latest
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - URL=dhzdhd.duckdns.org
+      - SUBDOMAINS=wildcard
+      - DNSPLUGIN=duckdns
+      - VALIDATION=dns
+      - ONLY_SUBDOMAINS=true
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - ./data/swag/config/:/config
+
+  duckdns:
+    container_name: duckdns
+    image: lscr.io/linuxserver/duckdns:latest
+    env_file: ./data/duckdns/.env
+    restart: unless-stopped
+
   homer:
+    container_name: homer
     image: b4bz/homer:latest
     ports:
-      - 16080:8080
-    container_name: homer
+      - 8080:8080
+    depends_on:
+      - swag
     user: 1000:1000
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./data/homer/assets/:/www/assets
 
   dufs:
-    image: sigoden/dufs
     container_name: dufs
+    image: sigoden/dufs
     env_file:
       - ./data/dufs/.env
     ports:
-      - 16443:5000
-    volumes:
-      - ./data/vscode/code/:/code
+      - 5000:5000
     restart: unless-stopped
-
-  openvscode-server:
-    image: lscr.io/linuxserver/openvscode-server:latest
-    container_name: openvscode-server
-    env_file:
-      - ./data/vscode/.env
     volumes:
-      - ./data/vscode/config:/config
-    ports:
-      - 16022:3000
-    restart: unless-stopped
+      - ./data/dufs/data:/data

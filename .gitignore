@@ -3,3 +3,5 @@
 /data/vscode/config
 /data/vscode/code/*
 !/data/vscode/code/.gitkeep
+
+data/swag/config/*
